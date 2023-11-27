@@ -48,5 +48,8 @@ public class Klient {
     }
     public static void zakonczenie() {
         System.out.println("Dziękujemy za skorzystanie z naszych usług");
+
+
+        
     }
 }
