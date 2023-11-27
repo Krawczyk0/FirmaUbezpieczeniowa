@@ -1,56 +1,105 @@
 package pl.gornik;
-
-import java.util.Scanner;
-
-public class SystemUbezpieczeniowy {
-    public static void main(String[] args) {
-        Scanner scanner=new Scanner(System.in);
-
-        String imie;
-        String nazwisko;
-        String typ;
-        double wartosc;
-
-        Klient.powitanie();
-
-        Klient klient1=new Klient("Jan", "Kowalski");
-        klient1.dodajPolise("Mieszkanie",  750);
-        klient1.wyswietlPolisy();
-        double sumaSkladekKlienta1=klient1.obliczSkladke();
-        System.out.println("Suma składek klienta "  + klient1 + ":" + sumaSkladekKlienta1);
-        scanner.nextLine();
-
-        KlientVIP klient2=new KlientVIP("Anna", "Nowak",  0.2);
-        klient2.dodajPolise("Samochod", 500);
-        klient2.wyswietlPolisy();
-        double sumaSkladekKlienta2=klient2.obliczSkladke();
-        System.out.println("Suma skladek klienta " + klient2 + ":" + sumaSkladekKlienta2);
-        scanner.nextLine();
-
-
-        Klient klient3= new Klient("Zbyszek", "Jakiś");
-        klient3.dodajPolise("Życiowa", 400);
-        klient3.wyswietlPolisy();
-        double sumaSkladekKlienta3= klient3.obliczSkladke();
-        System.out.println("Suma skladek klienta " + klient3 + ":" + sumaSkladekKlienta3);
-        scanner.nextLine();
-
-
-        klient3.usunPolise("Życiowa");
-        scanner.nextLine();
-
-
-        System.out.println("Podaj imie");
-        imie=scanner.nextLine();
-        System.out.println("Podaj nazwisko");
-        nazwisko=scanner.nextLine();
-        System.out.println("Podaj rodzaj polisy");
-        typ=scanner.nextLine();
-        System.out.println("Podaj wartosc polisy");
-        wartosc=scanner.nextDouble();
-        System.out.printf("Twoja suma skladek wynosi");
-
-
-        Klient.zakonczenie();
+switch (wybor) {
+                case 1:
+                    Klient nowyKlient = Klient.wczytajKlienta();
+                    listaKlientow.add(nowyKlient);
+                    System.out.println("Dodano nowego klienta.");
+                    break;
+                case 2:
+                    if (!listaKlientow.isEmpty()) {
+                        System.out.print("Podaj indeks klienta: ");
+                        int indeksKlienta = scanner.nextInt();
+                        if (indeksKlienta >= 0 && indeksKlienta < listaKlientow.size()) {
+                            Klient klient = listaKlientow.get(indeksKlienta);
+                            Polisa nowaPolisa = Klient.wczytajNowaPolise();
+                            klient.dodajPolise(nowaPolisa.getTyp(), nowaPolisa.getSkladka());
+                            System.out.println("Dodano polisę dla klienta.");
+                        } else {
+                            System.out.println("Nieprawidłowy indeks klienta.");
+                        }
+                    } else {
+                        System.out.println("Brak klientów. Dodaj nowego klienta.");
+                    }
+                    break;
+                case 3:
+                    if (!listaKlientow.isEmpty()) {
+                        System.out.print("Podaj indeks klienta: ");
+                        int indeksKlienta = scanner.nextInt();
+                        if (indeksKlienta >= 0 && indeksKlienta < listaKlientow.size()) {
+                            Klient klient = listaKlientow.get(indeksKlienta);
+                            scanner.nextLine(); 
+                            System.out.print("Podaj typ polisy do usunięcia: ");
+                            String typPolisy = scanner.nextLine();
+                            klient.usunPolise(typPolisy);
+                        } else {
+                            System.out.println("Nieprawidłowy indeks klienta.");
+                        }
+                    } else {
+                        System.out.println("Brak klientów.");
+                    }
+                    break;
+                case 4:
+                    if (!listaKlientow.isEmpty()) {
+                        System.out.print("Podaj indeks klienta: ");
+                        int indeksKlienta = scanner.nextInt();
+                        if (indeksKlienta >= 0 && indeksKlienta < listaKlientow.size()) {
+                            Klient klient = listaKlientow.get(indeksKlienta);
+                            klient.wyswietlPolisy();
+                        } else {
+                            System.out.println("Nieprawidłowy indeks klienta.");
+                        }
+                    } else {
+                        System.out.println("Brak klientów.");
+                    }
+                    break;
+                case 5:
+                    if (!listaKlientow.isEmpty()) {
+                        System.out.print("Podaj indeks klienta: ");
+                        int indeksKlienta = scanner.nextInt();
+                        if (indeksKlienta >= 0 && indeksKlienta < listaKlientow.size()) {
+                            Klient klient = listaKlientow.get(indeksKlienta);
+                            System.out.println("Dane klienta:");
+                            System.out.println("Imię: " + klient.imie);
+                            System.out.println("Nazwisko: " + klient.nazwisko);
+                            System.out.println("Suma składek: " + klient.obliczSkladkeSumaryczna());
+                        } else {
+                            System.out.println("Nieprawidłowy indeks klienta.");
+                        }
+                    } else {
+                        System.out.println("Brak klientów.");
+                    }
+                    break;
+                case 6:
+                    if (!listaKlientow.isEmpty()) {
+                        System.out.print("Podaj indeks klienta: ");
+                        int indeksKlienta = scanner.nextInt();
+                        if (indeksKlienta >= 0 && indeksKlienta < listaKlientow.size()) {
+                            Klient klient = listaKlientow.get(indeksKlienta);
+                            klient.zapiszDoPliku("klient_" + indeksKlienta + ".dat");
+                        } else {
+                            System.out.println("Nieprawidłowy indeks klienta.");
+                        }
+                    } else {
+                        System.out.println("Brak klientów.");
+                    }
+                    break;
+                case 7:
+                    System.out.print("Podaj nazwę pliku z danymi klienta: ");
+                    scanner.nextLine(); 
+                    String nazwaPliku = scanner.nextLine();
+                    Klient klientZPliku = Klient.wczytajZPliku(nazwaPliku);
+                    if (klientZPliku != null) {
+                        listaKlientow.add(klientZPliku);
+                        System.out.println("Dodano klienta z pliku.");
+                    }
+                    break;
+                case 8:
+                    Klient.zakonczenie();
+                    break;
+                default:
+                    System.out.println("Nieprawidłowa opcja. Wybierz ponownie.");
+                    break;
+            }
+        } while (wybor != 8);
     }
 }
