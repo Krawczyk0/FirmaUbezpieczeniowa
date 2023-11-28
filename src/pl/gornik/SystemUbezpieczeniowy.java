@@ -8,6 +8,7 @@ public class SystemUbezpieczeniowy {
     public static void main(String[] args) {
         Klient.powitanie();
         List<Klient> listaKlientow = new ArrayList<>();
+        initializeKlient(listaKlientow);
 
         int wybor;
         Scanner scanner = new Scanner(System.in);
@@ -136,5 +137,14 @@ public class SystemUbezpieczeniowy {
                     break;
             }
         } while (wybor != 9);
+    }
+
+    public static void initializeKlient(List<Klient> listaKlientow) {
+        listaKlientow.add(new Klient("Jan", "Kowalski"));
+        listaKlientow.add(new Klient("Zbyszek","Nowak"));
+        listaKlientow.add(new Klient("Paweł","Stolarski"));
+        listaKlientow.add(new KlientVIP("Izydor","Komorowski",5));
+        listaKlientow.add(new KlientVIP("Henryk","Belek",3));
+        listaKlientow.add(new KlientVIP("Jacek","Baran",2.5));
     }
 }
