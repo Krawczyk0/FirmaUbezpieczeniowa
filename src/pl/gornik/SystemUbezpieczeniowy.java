@@ -8,6 +8,7 @@ public class SystemUbezpieczeniowy {
     public static void main(String[] args) {
         Klient.powitanie();
         List<Klient> listaKlientow = new ArrayList<>();
+        initializeKlient(listaKlientow);
 
         int wybor;
         Scanner scanner = new Scanner(System.in);
@@ -18,10 +19,11 @@ public class SystemUbezpieczeniowy {
             System.out.println("2. Dodaj polisę dla klienta");
             System.out.println("3. Usuń polisę klienta");
             System.out.println("4. Wyświetl polisy klienta");
-            System.out.println("5. Wyświetl dane klienta");
-            System.out.println("6. Zapisz dane klienta do pliku");
-            System.out.println("7. Wczytaj dane klienta z pliku");
-            System.out.println("8. Zakończ");
+            System.out.println("5. Wyświetl wszystkich klientow");
+            System.out.println("6. Wyświetl dane klienta");
+            System.out.println("7. Zapisz dane klienta do pliku");
+            System.out.println("8. Wczytaj dane klienta z pliku");
+            System.out.println("9. Zakończ");
 
             System.out.print("Wybierz opcję: ");
             wybor = scanner.nextInt();
@@ -128,5 +130,14 @@ public class SystemUbezpieczeniowy {
                     break;
             }
         } while (wybor != 8);
+    }
+
+    public static void initializeKlient(List<Klient> listaKlientow) {
+        listaKlientow.add(new Klient("Jan", "Kowalski"));
+        listaKlientow.add(new Klient("Zbyszek","Nowak"));
+        listaKlientow.add(new Klient("Paweł","Stolarski"));
+        listaKlientow.add(new KlientVIP("Izydor","Komorowski",5));
+        listaKlientow.add(new KlientVIP("Henryk","Belek",3));
+        listaKlientow.add(new KlientVIP("Jacek","Baran",2.5));
     }
 }
