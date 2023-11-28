@@ -93,4 +93,11 @@ class Klient implements Serializable {
             return null;
         }
     }
+     public static void wyswietlWszystkichKlientow(List<Klient> listaKlientow) {
+        System.out.println("Lista wszystkich klientów:");
+        for (int i = 0; i < listaKlientow.size(); i++) {
+            Klient klient = listaKlientow.get(i);
+            System.out.println(i + ". " + klient.imie + " " + klient.nazwisko);
+        }
+    }
 }
