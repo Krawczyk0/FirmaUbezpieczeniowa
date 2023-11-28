@@ -1,5 +1,32 @@
 package pl.gornik;
-switch (wybor) {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+
+public class SystemUbezpieczeniowy {
+    public static void main(String[] args) {
+        Klient.powitanie();
+        List<Klient> listaKlientow = new ArrayList<>();
+
+        int wybor;
+        Scanner scanner = new Scanner(System.in);
+
+        do {
+            System.out.println("\nMenu:");
+            System.out.println("1. Dodaj nowego klienta");
+            System.out.println("2. Dodaj polisę dla klienta");
+            System.out.println("3. Usuń polisę klienta");
+            System.out.println("4. Wyświetl polisy klienta");
+            System.out.println("5. Wyświetl dane klienta");
+            System.out.println("6. Zapisz dane klienta do pliku");
+            System.out.println("7. Wczytaj dane klienta z pliku");
+            System.out.println("8. Zakończ");
+
+            System.out.print("Wybierz opcję: ");
+            wybor = scanner.nextInt();
+
+            switch (wybor) {
                 case 1:
                     Klient nowyKlient = Klient.wczytajKlienta();
                     listaKlientow.add(nowyKlient);
@@ -27,7 +54,7 @@ switch (wybor) {
                         int indeksKlienta = scanner.nextInt();
                         if (indeksKlienta >= 0 && indeksKlienta < listaKlientow.size()) {
                             Klient klient = listaKlientow.get(indeksKlienta);
-                            scanner.nextLine(); 
+                            scanner.nextLine();
                             System.out.print("Podaj typ polisy do usunięcia: ");
                             String typPolisy = scanner.nextLine();
                             klient.usunPolise(typPolisy);
@@ -85,7 +112,7 @@ switch (wybor) {
                     break;
                 case 7:
                     System.out.print("Podaj nazwę pliku z danymi klienta: ");
-                    scanner.nextLine(); 
+                    scanner.nextLine();
                     String nazwaPliku = scanner.nextLine();
                     Klient klientZPliku = Klient.wczytajZPliku(nazwaPliku);
                     if (klientZPliku != null) {
