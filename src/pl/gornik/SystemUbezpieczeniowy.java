@@ -56,7 +56,7 @@ public class SystemUbezpieczeniowy {
                         int indeksKlienta = scanner.nextInt();
                         if (indeksKlienta >= 0 && indeksKlienta < listaKlientow.size()) {
                             Klient klient = listaKlientow.get(indeksKlienta);
-                            scanner.nextLine(); // Konsumuj znak nowej linii
+                            scanner.nextLine();
                             System.out.print("Podaj typ polisy do usunięcia: ");
                             String typPolisy = scanner.nextLine();
                             klient.usunPolise(typPolisy);
@@ -121,7 +121,7 @@ public class SystemUbezpieczeniowy {
                     break;
                 case 8:
                     System.out.print("Podaj nazwę pliku z danymi klienta: ");
-                    scanner.nextLine(); // Konsumuj znak nowej linii
+                    scanner.nextLine(); 
                     String nazwaPliku = scanner.nextLine();
                     Klient klientZPliku = Klient.wczytajZPliku(nazwaPliku);
                     if (klientZPliku != null) {
