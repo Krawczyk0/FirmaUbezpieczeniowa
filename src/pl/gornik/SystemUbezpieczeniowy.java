@@ -8,7 +8,6 @@ public class SystemUbezpieczeniowy {
     public static void main(String[] args) {
         Klient.powitanie();
         List<Klient> listaKlientow = new ArrayList<>();
-        initializeKlient(listaKlientow);
 
         int wybor;
         Scanner scanner = new Scanner(System.in);
@@ -19,7 +18,7 @@ public class SystemUbezpieczeniowy {
             System.out.println("2. Dodaj polisę dla klienta");
             System.out.println("3. Usuń polisę klienta");
             System.out.println("4. Wyświetl polisy klienta");
-            System.out.println("5. Wyświetl wszystkich klientow");
+            System.out.println("5. Wyświetl wszystkich klientów");
             System.out.println("6. Wyświetl dane klienta");
             System.out.println("7. Zapisz dane klienta do pliku");
             System.out.println("8. Wczytaj dane klienta z pliku");
@@ -56,7 +55,7 @@ public class SystemUbezpieczeniowy {
                         int indeksKlienta = scanner.nextInt();
                         if (indeksKlienta >= 0 && indeksKlienta < listaKlientow.size()) {
                             Klient klient = listaKlientow.get(indeksKlienta);
-                            scanner.nextLine();
+                            scanner.nextLine(); // Konsumuj znak nowej linii
                             System.out.print("Podaj typ polisy do usunięcia: ");
                             String typPolisy = scanner.nextLine();
                             klient.usunPolise(typPolisy);
@@ -83,6 +82,13 @@ public class SystemUbezpieczeniowy {
                     break;
                 case 5:
                     if (!listaKlientow.isEmpty()) {
+                        Klient.wyswietlWszystkichKlientow(listaKlientow);
+                    } else {
+                        System.out.println("Brak klientów.");
+                    }
+                    break;
+                case 6:
+                    if (!listaKlientow.isEmpty()) {
                         System.out.print("Podaj indeks klienta: ");
                         int indeksKlienta = scanner.nextInt();
                         if (indeksKlienta >= 0 && indeksKlienta < listaKlientow.size()) {
@@ -98,7 +104,7 @@ public class SystemUbezpieczeniowy {
                         System.out.println("Brak klientów.");
                     }
                     break;
-                case 6:
+                case 7:
                     if (!listaKlientow.isEmpty()) {
                         System.out.print("Podaj indeks klienta: ");
                         int indeksKlienta = scanner.nextInt();
@@ -112,9 +118,9 @@ public class SystemUbezpieczeniowy {
                         System.out.println("Brak klientów.");
                     }
                     break;
-                case 7:
+                case 8:
                     System.out.print("Podaj nazwę pliku z danymi klienta: ");
-                    scanner.nextLine();
+                    scanner.nextLine(); // Konsumuj znak nowej linii
                     String nazwaPliku = scanner.nextLine();
                     Klient klientZPliku = Klient.wczytajZPliku(nazwaPliku);
                     if (klientZPliku != null) {
@@ -122,22 +128,13 @@ public class SystemUbezpieczeniowy {
                         System.out.println("Dodano klienta z pliku.");
                     }
                     break;
-                case 8:
+                case 9:
                     Klient.zakonczenie();
                     break;
                 default:
                     System.out.println("Nieprawidłowa opcja. Wybierz ponownie.");
                     break;
             }
-        } while (wybor != 8);
-    }
-
-    public static void initializeKlient(List<Klient> listaKlientow) {
-        listaKlientow.add(new Klient("Jan", "Kowalski"));
-        listaKlientow.add(new Klient("Zbyszek","Nowak"));
-        listaKlientow.add(new Klient("Paweł","Stolarski"));
-        listaKlientow.add(new KlientVIP("Izydor","Komorowski",5));
-        listaKlientow.add(new KlientVIP("Henryk","Belek",3));
-        listaKlientow.add(new KlientVIP("Jacek","Baran",2.5));
+        } while (wybor != 9);
     }
 }
