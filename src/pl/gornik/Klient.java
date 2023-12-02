@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-
 class Klient implements Serializable {
     public String imie;
     public String nazwisko;
-    private List<Polisa> polisy;
+    public List<Polisa> polisy;
 
     public Klient(String imie, String nazwisko) {
         this.imie = imie;
@@ -58,10 +57,25 @@ class Klient implements Serializable {
 
     public static Klient wczytajKlienta() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Podaj imię klienta: ");
-        String imie = scanner.nextLine();
-        System.out.print("Podaj nazwisko klienta: ");
-        String nazwisko = scanner.nextLine();
+        String imie;
+        String nazwisko;
+
+        do {
+            System.out.print("Podaj imię klienta (zaczynając od wielkiej litery): ");
+            imie = scanner.nextLine().trim();
+            if (imie.isEmpty() || !Character.isUpperCase(imie.charAt(0))) {
+                System.out.println("Imię nie może być puste i musi zaczynać się od wielkiej litery. Podaj ponownie.");
+            }
+        } while (imie.isEmpty() || !Character.isUpperCase(imie.charAt(0)));
+
+        do {
+            System.out.print("Podaj nazwisko klienta (zaczynając od wielkiej litery): ");
+            nazwisko = scanner.nextLine().trim();
+            if (nazwisko.isEmpty() || !Character.isUpperCase(nazwisko.charAt(0))) {
+                System.out.println("Nazwisko nie może być puste i musi zaczynać się od wielkiej litery. Podaj ponownie.");
+            }
+        } while (nazwisko.isEmpty() || !Character.isUpperCase(nazwisko.charAt(0)));
+
         return new Klient(imie, nazwisko);
     }
 
@@ -93,7 +107,8 @@ class Klient implements Serializable {
             return null;
         }
     }
-     public static void wyswietlWszystkichKlientow(List<Klient> listaKlientow) {
+
+    public static void wyswietlWszystkichKlientow(List<Klient> listaKlientow) {
         System.out.println("Lista wszystkich klientów:");
         for (int i = 0; i < listaKlientow.size(); i++) {
             Klient klient = listaKlientow.get(i);
